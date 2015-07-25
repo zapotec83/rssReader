@@ -12,7 +12,7 @@ import java.util.List;
 
 import es.jorider.rssreader.constants.ConstantsDB;
 import es.jorider.rssreader.model.RssItem;
-import es.jorider.rssreader.util.DBImageUtils;
+import es.jorider.rssreader.util.ImageUtils;
 
 /**
  * Created by jorge
@@ -20,6 +20,7 @@ import es.jorider.rssreader.util.DBImageUtils;
 public class DBRssItem {
 
     public final String TAG = DBRssItem.class.getName();
+
     private SQLiteDatabase db = null;
     private DatabaseHelper openHelper = null;
 
@@ -45,10 +46,13 @@ public class DBRssItem {
         try {
             ContentValues values = new ContentValues();
             values.put(ConstantsDB._TABLE_RSS_TITLE, rssItem.getTitle());
+            values.put(ConstantsDB._TABLE_RSS_DATE, rssItem.getDate());
             values.put(ConstantsDB._TABLE_RSS_DESCRIPTION, rssItem.getDescription());
-            values.put(ConstantsDB._TABLE_RSS_LINK, rssItem.getLink());
-            values.put(ConstantsDB._TABLE_RSS_DATE, rssItem.getPubDate());
-            values.put(ConstantsDB._TABLE_RSS_IMAGE, DBImageUtils.getBitmapAsByteArray(rssItem.getImage()));
+            try {
+                values.put(ConstantsDB._TABLE_RSS_IMAGE, ImageUtils.getBitmapAsByteArray(rssItem.getImage()));
+            } catch (NullPointerException e) {
+                Log.e(TAG, "Image null");
+            }
 
             db = openHelper.getWritableDatabase();
             valor = db.insert(ConstantsDB.TABLE_RSS_NAME, null, values);
@@ -70,8 +74,8 @@ public class DBRssItem {
      *
      * @return
      */
-    public List<RssItem> getAll() {
-        List<RssItem> list = new ArrayList<RssItem>();
+    public ArrayList<RssItem> getAll() {
+        ArrayList<RssItem> list = new ArrayList<RssItem>();
 
         Cursor c = null;
 
@@ -83,11 +87,11 @@ public class DBRssItem {
                 // Recorremos el cursor hasta que no haya mas registros
                 do {
                     RssItem rssItem = new RssItem();
-                    rssItem.setTitle(c.getString(0));
-                    rssItem.setDescription(c.getString(1));
-                    rssItem.setLink(c.getString(2));
-                    rssItem.setPubDate(c.getString(3));
-                    rssItem.setImage(DBImageUtils.getImageFromByteArray(c.getBlob(4)));
+                    rssItem.setId(c.getInt(0));
+                    rssItem.setTitle(c.getString(1));
+                    rssItem.setDate(c.getString(2));
+                    rssItem.setDescription(c.getString(3));
+                    rssItem.setImage(ImageUtils.getImageFromByteArray(c.getBlob(4)));
 
                     list.add(rssItem);
 
@@ -120,10 +124,11 @@ public class DBRssItem {
         try {
             db = openHelper.getWritableDatabase();
             resp = db.delete(ConstantsDB.TABLE_RSS_NAME, null, null);
+        }catch (SQLiteException e) {
+            Log.e(TAG, e.getMessage());
         } finally {
             closeConnector();
         }
-
         return resp;
     }
 

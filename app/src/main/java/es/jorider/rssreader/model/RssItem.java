@@ -9,14 +9,22 @@ import android.os.Parcelable;
  */
 public class RssItem implements Parcelable {
 
+    private int id = 0;
     private String title = null;
     private String description = null;
-    private String link = null;
-    private String pubDate = null;
+    private String date = null;
     private Bitmap image = null;
     private String imageSrc = null;
 
     public RssItem() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -35,20 +43,12 @@ public class RssItem implements Parcelable {
         this.description = description;
     }
 
-    public String getLink() {
-        return link;
+    public String getDate() {
+        return date;
     }
 
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getPubDate() {
-        return pubDate;
-    }
-
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Bitmap getImage() {
@@ -74,19 +74,19 @@ public class RssItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.title);
+        dest.writeString(this.date);
         dest.writeString(this.description);
-        dest.writeString(this.link);
-        dest.writeString(this.pubDate);
         dest.writeParcelable(this.image, 0);
         dest.writeString(this.imageSrc);
     }
 
     private RssItem(Parcel in) {
+        this.id = in.readInt();
         this.title = in.readString();
+        this.date = in.readString();
         this.description = in.readString();
-        this.link = in.readString();
-        this.pubDate = in.readString();
         this.image = in.readParcelable(Bitmap.class.getClassLoader());
         this.imageSrc = in.readString();
     }

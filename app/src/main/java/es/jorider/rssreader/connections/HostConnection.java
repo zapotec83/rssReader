@@ -19,6 +19,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import es.jorider.rssreader.constants.ConstantsCon;
+import es.jorider.rssreader.constants.ConstantsRss;
 import es.jorider.rssreader.interfaces.OnDownloadImages;
 import es.jorider.rssreader.model.RespServer;
 import es.jorider.rssreader.model.RssItem;
@@ -96,15 +97,13 @@ public class HostConnection {
                         nodeString = nodeChild.item(j).getAttributes().item(2).getNodeValue();
                     }
                     if (nodeString != null) {
-                        if ("title".equals(nodeName)) {
+                        if (ConstantsRss.TITLE.equals(nodeName)) {
                             item.setTitle(nodeString);
-                        } else if ("description".equals(nodeName)) {
+                        } else if (ConstantsRss.DESCRIPTION.equals(nodeName)) {
                             item.setDescription(nodeString);
-                        } else if ("link".equals(nodeName)) {
-                            item.setLink(nodeString);
-                        } else if ("pubDate".equals(nodeName)) {
-                            item.setPubDate(nodeString);
-                        } else if ("media:thumbnail".equals(nodeName)){
+                        } else if (ConstantsRss.DATE.equals(nodeName)) {
+                            item.setDate(nodeString);
+                        } else if (ConstantsRss.IMAGE.equals(nodeName)){
                             item.setImageSrc(nodeString);
                         }
                     }

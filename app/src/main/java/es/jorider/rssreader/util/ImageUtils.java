@@ -2,13 +2,14 @@ package es.jorider.rssreader.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 
 import java.io.ByteArrayOutputStream;
 
 /**
- * Created by jorge on 22/11/14.
+ * Created by jorge
  */
-public class DBImageUtils {
+public class ImageUtils {
 
     /**
      * Get image as byteArray
@@ -29,6 +30,19 @@ public class DBImageUtils {
      * @return
      */
     public static Bitmap getImageFromByteArray(byte[] array) {
-        return BitmapFactory.decodeByteArray(array, 0, array.length);
+        Bitmap response = (array != null) ? BitmapFactory.decodeByteArray(array, 0, array.length) : null;
+        return response;
+    }
+
+    /**
+     * Resize Bitmap
+     *
+     * @param bitmap
+     * @param sizeBigger
+     * @return
+     */
+    public static Bitmap getResizeBitmap(Bitmap bitmap, int sizeBigger) {
+        return Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() * sizeBigger, bitmap.getHeight() * sizeBigger, false);
+
     }
 }

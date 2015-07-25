@@ -2,15 +2,12 @@
 <resources>
 
     <string name="app_name">RssReader</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="rss_new">Rss new</string>
     <string name="error_no_network_available"><![CDATA[ERROR!-> Network is NOT available, loading the last ones fetched...]]></string>
     <string name="wait_please">Wait please</string>
     <string name="getting_news">Getting the last news available</string>
     <string name="error_host_no_reachable">Host no reachable! Please, change the host on the preferences. We are going to show the lastest stored</string>
-    <string name="open_in_browser">Open in Browser</string>
     <string name="no_internet_connection">No Internet connection!</string>
-    <string name="change_url">Change URL</string>
     <string name="accept">OK</string>
 
 </resources>

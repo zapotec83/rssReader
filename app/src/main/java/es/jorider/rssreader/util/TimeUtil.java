@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by jorge on 23/11/14.
+ * Created by jorge
  */
 public class TimeUtil {
 
@@ -15,6 +15,7 @@ public class TimeUtil {
 
     private static final SimpleDateFormat sdfRSS = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z");
     private static final SimpleDateFormat sdfAPP = new SimpleDateFormat("yyyyMMddHHmmss");
+    private static final SimpleDateFormat sdfShow = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     /**
      * Method to store the info of the time in the database to be able to restore it easier
@@ -24,7 +25,8 @@ public class TimeUtil {
      */
     public static String dateFromRssToApp(String rssDate) {
 
-        String resp = getCurrentTimeAPP();
+        Date d = new Date(System.currentTimeMillis());
+        String resp = sdfAPP.format(d);
 
         try {
             Date date = sdfRSS.parse(rssDate);
@@ -41,36 +43,16 @@ public class TimeUtil {
      * @param appDate       String
      * @return
      */
-    public static String dateFromAppToRss(String appDate) {
-        String resp = getCurrentTimeRSS();
+    public static String dateFromAppToShow(String appDate) {
+        Date d = new Date(System.currentTimeMillis());
+        String resp = sdfShow.format(d);
 
         try {
             Date date = sdfAPP.parse(appDate);
-            resp = sdfRSS.format(date);
+            resp = sdfShow.format(date);
         } catch (ParseException e) {
             Log.e(TAG, "Error parsing date");
         }
         return resp;
     }
-
-    /**
-     * Method to return the current time for APP
-     *
-     * @return
-     */
-    private static String getCurrentTimeAPP() {
-        Date date = new Date(System.currentTimeMillis());
-        return sdfAPP.format(date);
-    }
-
-    /**
-     * Method to return the current time for RSS
-     *
-     * @return
-     */
-    private static String getCurrentTimeRSS() {
-        Date date = new Date(System.currentTimeMillis());
-        return sdfRSS.format(date);
-    }
-
 }

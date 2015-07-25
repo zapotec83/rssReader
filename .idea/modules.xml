@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RssReader.iml" filepath="$PROJECT_DIR$/RssReader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rssReader.iml" filepath="$PROJECT_DIR$/rssReader.iml" />
     </modules>
   </component>
 </project>
-

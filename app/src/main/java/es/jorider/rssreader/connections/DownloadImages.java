@@ -28,10 +28,9 @@ public class DownloadImages extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        //We get the data transformed into the way we want (Image and Date)
         for (int i = 0; i < rssItemList.size(); i++) {
             rssItemList.get(i).setImage(getImageFromString(rssItemList.get(i).getImageSrc()));
-            rssItemList.get(i).setPubDate(TimeUtil.dateFromRssToApp(rssItemList.get(i).getPubDate()));
+            rssItemList.get(i).setDate(TimeUtil.dateFromRssToApp(rssItemList.get(i).getDate()));
         }
         return null;
     }

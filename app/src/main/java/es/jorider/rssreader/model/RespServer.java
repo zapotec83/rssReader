@@ -3,7 +3,7 @@ package es.jorider.rssreader.model;
 import java.util.List;
 
 /**
- * Created by jorge on 22/11/14.
+ * Created by jorge
  */
 public class RespServer {
 

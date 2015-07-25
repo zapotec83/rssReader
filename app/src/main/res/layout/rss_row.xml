@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relative_row"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/title_rss"
-        android:textStyle="bold"
-        android:text="TITLE HERE"/>
+        android:padding="5dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/short_description"
-        android:gravity="right"
-        android:textStyle="normal"
-        android:text="Description here"/>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/ic_launcher" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image"
-        android:src="@drawable/ic_launcher"/>
-
-</TableRow>
+        <TextView
+            android:id="@+id/title_rss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/image"
+            android:ellipsize="marquee"
+            android:maxLines="1"
+            android:text="Title here"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>
